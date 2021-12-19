@@ -4,7 +4,9 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    path_img: "https://image.tmdb.org/t/p/w300"
+  },
   mutations: {},
   actions: {},
   modules: {},

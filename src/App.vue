@@ -49,6 +49,8 @@ html, body {
 
 :root {
   --primary: #032541;
+  --blue: #02B5E2;
+  --green: #1CD3AC;
 
 }
 
