@@ -5,8 +5,21 @@
         <h1>{{sessionTitle}}</h1>
         <h1>Aqui vai um select</h1>
     </div>
-    <div class="filmes">  
+    <button @click="filmesTV">tv</button><button @click="filmesStreaming">streaming</button>
+    <div class="filmes" v-if="isTV">  
+         <Filme
+        
+        v-for="(filme, index) in filmes"
+        :key="index"
+        :path="path + filme.poster_path" 
+        :title="filme.name"
+        :data="filme.first_air_date" 
+        :ratio="filme.vote_average"
+        />
+    </div>
+    <div class="filmes" v-else>  
         <Filme
+        
         v-for="(filme, index) in filmes"
         :key="index"
         :path="path + filme.poster_path" 
@@ -14,6 +27,7 @@
         :data="filme.release_date" 
         :ratio="filme.vote_average"
         />
+       
     </div>
         
 </div>
@@ -32,7 +46,8 @@ export default {
     data() {
         return {
             filmes: [],
-            path: "https://image.tmdb.org/t/p/w220_and_h330_face"
+            path: "https://image.tmdb.org/t/p/w220_and_h330_face",
+            isTV: false
         }
     }, 
     props: [
@@ -40,6 +55,22 @@ export default {
     ],
     components: {
         Filme
+    },
+    methods: {
+        filmesStreaming(){
+            api.get(`/discover/movie`).then(res => {
+            this.filmes = res.data.results;
+            console.log(this.filmes)
+            this.isTV = false
+        })
+        },
+        filmesTV(){
+            api.get(`/discover/tv`).then(res => {
+            this.filmes = res.data.results;
+            console.log(this.filmes)
+            this.isTV = true
+        })
+        }
     },
     mounted(){
         api.get(`/discover/movie`).then(res => {

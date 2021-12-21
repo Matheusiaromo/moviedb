@@ -2,15 +2,16 @@
    <div class="card">
         <div class="img">
             <img :src="path" alt="">
+            <div class="ratio borda">
+            <span>{{ratio }}</span>
+            <span>%</span>
+        </div>
         </div>
         <div class="content">
             <h4>{{title}}</h4>
             <h5>{{data}}</h5>
         </div>
-        <div class="ratio borda">
-            <span>{{ratio }}</span>
-            <span>%</span>
-        </div>
+        
     </div>
 </template>
 
@@ -31,7 +32,7 @@ export default {
 
 .card {
     margin-right: 30px;
-    position: relative;
+    
     
 }
 
@@ -40,6 +41,12 @@ export default {
     width: 150px;
     height: 225px;
     margin-bottom: 20px;
+    
+}
+
+.img {
+
+position: relative;
 }
 
 .ratio {
@@ -52,9 +59,8 @@ export default {
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    bottom: 85px;
+    bottom: 8px;
     left: 20px;
-    
 }
 
 .borda {

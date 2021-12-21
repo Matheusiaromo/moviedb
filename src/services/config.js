@@ -5,6 +5,7 @@ const language = '&language=pt-BR';
 const region = '&region=BR';
 
 
+
 const axiosInstances = axios.create({
         baseURL: "https://api.themoviedb.org/3/"
       })
