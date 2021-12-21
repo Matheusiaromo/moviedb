@@ -3,7 +3,7 @@
         <div class="img">
             <img :src="path" alt="">
             <div class="ratio borda">
-            <span>{{ratio }}</span>
+            <span>{{ratio | tiraPonto}}</span>
             <span>%</span>
         </div>
         </div>
@@ -23,7 +23,13 @@ export default {
         'title',
         'data',
         'ratio'
-    ]
+    ],
+    filters: {
+        tiraPonto(numero){
+            const newValue = numero.toString()
+            return newValue.replace('.', '')
+        }
+    }
 
 }
 </script>
@@ -61,6 +67,7 @@ position: relative;
     border-radius: 50%;
     bottom: 8px;
     left: 20px;
+    font-weight: 700    ;
 }
 
 .borda {

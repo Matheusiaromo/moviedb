@@ -2,33 +2,27 @@
 
 <div class="container">
     <div class="title">
-        <h1>{{sessionTitle}}</h1>
-        <h1>Aqui vai um select</h1>
+        <h2>{{sessionTitle}}</h2>
+        <ul class="select">
+            <li @click="filmesStreaming">Streaming</li>
+            <li @click="filmesTV">Na TV</li>
+        </ul>
     </div>
-    <button @click="filmesTV">tv</button><button @click="filmesStreaming">streaming</button>
-    <div class="filmes" v-if="isTV">  
+
+    
+   
+    <div class="filmes">  
          <Filme
         
         v-for="(filme, index) in filmes"
         :key="index"
         :path="path + filme.poster_path" 
-        :title="filme.name"
-        :data="filme.first_air_date" 
+        :title="filme.name ? filme.name : filme.title"
+        :data="filme.first_air_date ? filme.first_air_date : filme.release_date" 
         :ratio="filme.vote_average"
         />
     </div>
-    <div class="filmes" v-else>  
-        <Filme
-        
-        v-for="(filme, index) in filmes"
-        :key="index"
-        :path="path + filme.poster_path" 
-        :title="filme.title"
-        :data="filme.release_date" 
-        :ratio="filme.vote_average"
-        />
-       
-    </div>
+    
         
 </div>
 
@@ -61,14 +55,14 @@ export default {
             api.get(`/discover/movie`).then(res => {
             this.filmes = res.data.results;
             console.log(this.filmes)
-            this.isTV = false
+          
         })
         },
         filmesTV(){
             api.get(`/discover/tv`).then(res => {
             this.filmes = res.data.results;
             console.log(this.filmes)
-            this.isTV = true
+            
         })
         }
     },
@@ -100,6 +94,31 @@ div {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
+.select {
+    list-style: none;
+    border-radius: 20px;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 15px;
+    border: 1px solid var(--primary);
+    padding: 0px;
+   
+}
+
+.select li {
+        display: inline-block;
+        padding: 5px 20px;
+    
+}
+
+.select li:hover {
+    background: var(--primary);
+    border-radius: 20px;
+    color: var(--green);
+    font-weight: 700;
+    cursor: pointer;
+}
 </style>
